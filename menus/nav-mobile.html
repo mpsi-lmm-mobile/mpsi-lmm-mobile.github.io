@@ -82,6 +82,30 @@ if ('serviceWorker' in navigator) {
    <li id="target-onglet-langues"></li>
 <li><a href='/install.html'>Installer l'app</a>
 </li>
+<li>
+<a href="#" id="updatePdfsLink">Mise à jour PDF</a>
+
+<script>
+  document.getElementById('updatePdfsLink').addEventListener('click', async (event) => {
+    event.preventDefault();
+    if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({ action: 'updatePdfs' });
+    } else {
+      console.error('Service Worker not available');
+    }
+  });
+
+  // Écouter les messages du Service Worker
+  navigator.serviceWorker.addEventListener('message', event => {
+    if (event.data.success) {
+      alert(event.data.message);
+    } else {
+      alert(event.data.message);
+    }
+  });
+</script>
+
+</li>
         </ul>
     </div>
 </div>
