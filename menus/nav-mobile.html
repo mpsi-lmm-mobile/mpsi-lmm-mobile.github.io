@@ -303,29 +303,80 @@ openModal();
     }
 });
 
+// Swipe
+// --- Paramètres de configuration ---
+const minSwipeDistance = 50; // Distance minimale en pixels pour considérer que c'est un swipe valide
+const maxVerticalDeviation = 75; // Déviation maximale en pixels autorisée verticalement
 
+// --- Variables de suivi de l'événement tactile ---
+let touchstartX = 0;
+let touchstartY = 0;
+let isSwiping = false;
 
-/*
-let startX = 0;
-let endX = 0;
-const element = document.getElementById('myElement'); // Remplacez par votre sélecteur
+// --- Événements Tactiles ---
 
-element.addEventListener('touchstart', (e) => {
-  startX = e.touches[0].clientX;
+document.addEventListener('touchstart', (event) => {
+    // On ne gère que le premier doigt
+    if (event.touches.length === 1) {
+        touchstartX = event.touches[0].clientX;
+        touchstartY = event.touches[0].clientY;
+        isSwiping = true;
+    }
+}, { passive: true }); // { passive: true } pour ne pas bloquer le scrolling
+
+document.addEventListener('touchmove', (event) => {
+    if (!isSwiping || event.touches.length !== 1) {
+        return;
+    }
+
+    const currentY = event.touches[0].clientY;
+    const diffY = currentY - touchstartY;
+
+    // Si la déviation verticale est trop grande, on assume que l'utilisateur scroll
+    // et on désactive la détection de swipe pour ne pas freiner la navigation normale.
+    if (Math.abs(diffY) > maxVerticalDeviation) {
+        isSwiping = false;
+        return;
+    }
+
+    // Le `touchmove` reste passif pour permettre le scrolling vertical/horizontal normal.
+
+}, { passive: false });
+
+document.addEventListener('touchend', (event) => {
+    if (!isSwiping) {
+        isSwiping = false;
+        return;
+    }
+
+    const touchendX = event.changedTouches[0].clientX;
+    const touchendY = event.changedTouches[0].clientY; // Coordonnée Y de fin
+
+    const diffX = touchendX - touchstartX;
+    const diffY = touchendY - touchstartY;
+
+    // 1. Vérifie si la distance horizontale est suffisante (seuil)
+    if (Math.abs(diffX) > minSwipeDistance) {
+
+        // 2. Vérifie si le mouvement est principalement horizontal
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            
+            if (diffX > 0) {
+                openModal();
+               
+
+            } else {
+                closeModal();
+                
+            }
+        }
+    }
+
+    // Réinitialisation après le geste
+    isSwiping = false;
+
 });
 
-element.addEventListener('touchend', (e) => {
-  endX = e.changedTouches[0].clientX;
-  
-  // Définit une distance minimale pour éviter les clics accidentels
-  const minSwipeDistance = 50; 
-
-  if (startX - endX > minSwipeDistance) {
-    console.log('Balayage vers la gauche détecté !');
-openModal();
-    // Mettez ici le code à exécuter, par exemple une animation ou un changement de page
-  }
-});*/
 
 
 
