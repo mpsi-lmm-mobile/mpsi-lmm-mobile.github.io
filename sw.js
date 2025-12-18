@@ -1,5 +1,5 @@
-const STATIC_CACHE = 'pwa-static-v2';
-const DYNAMIC_CACHE = 'pwa-dynamic-v2';
+const STATIC_CACHE = 'pwa-static-v3';
+const DYNAMIC_CACHE = 'pwa-dynamic-v3';
 const urlsToCache = [
   '/',
   '/index.html',
