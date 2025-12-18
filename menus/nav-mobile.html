@@ -303,7 +303,7 @@ if ('serviceWorker' in navigator) {
         modalOverlay.addEventListener('click', closeModal);
 
 document.addEventListener('mousemove', function(event) {
-    const edgeThreshold = 5; // Le nombre de pixels à partir du bord que l'on considère comme le bord.
+    const edgeThreshold = 15; // Le nombre de pixels à partir du bord que l'on considère comme le bord.
     
     if (event.clientX < edgeThreshold) {
         console.log('La souris est sur le bord gauche de l\'écran !');
