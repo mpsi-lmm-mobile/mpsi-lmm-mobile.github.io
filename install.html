@@ -34,14 +34,28 @@
     <div id="hideoverflow">
       <div id="outer">
         <div id="inner">
-          <div id="contenu">
-            <font style="font-weight: bold ;"> Comment installer l'application  : </font><br>
-            <p>Sur le navigateur Chrome, cliquez sur "ajouter à l'écran d'accueil" puis "installer l'application".</p>
+          <style>
+  #contenu {
+    max-width: 100%;      /* Empêche le conteneur de déborder */
+    overflow-wrap: break-word; /* Coupe les mots trop longs si nécessaire */
+    padding: 15px;        /* Un peu d'espace pour la lisibilité */
+    box-sizing: border-box;
+  }
 
-<img src="img/Screenshot_2025-09-18-20-44-34-068_com.android.chrome-edit.jpg">
-        
-          </div>
-         
+  #contenu img {
+    max-width: 100% !important; /* Force l'image à ne jamais dépasser la largeur de l'écran */
+    height: auto !important;    /* Conserve les proportions de l'image */
+    display: block;             /* Évite les espaces vides sous l'image */
+    margin: 10px 0;             /* Ajoute un petit espace vertical */
+  }
+</style>
+
+<div id="contenu">
+  <span style="font-weight: bold;"> Comment installer l'application : </span><br>
+  <p>Sur le navigateur Chrome, cliquez sur "ajouter à l'écran d'accueil" puis "installer l'application".</p>
+<p>Ce site enregistre des statistiques anonymes d'utilisation.</p>
+  <img src="img/Screenshot_2025-09-18-20-44-34-068_com.android.chrome-edit.jpg">
+</div>
           
         </div>
       </div>
